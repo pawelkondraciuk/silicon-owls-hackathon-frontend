@@ -18,6 +18,15 @@
     "paths": {
       "@owls/app-material": [
         "libs/app-material/src/index.ts"
+      ],
+      "@owls/navbar": [
+        "libs/navbar/src/index.ts"
+      ],
+      "@owls/sidebar": [
+        "libs/sidebar/src/index.ts"
+      ],
+      "@owls/uploader": [
+        "libs/uploader/src/index.ts"
       ]
     }
   },

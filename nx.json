@@ -16,6 +16,15 @@
     },
     "app-material": {
       "tags": []
+    },
+    "navbar": {
+      "tags": []
+    },
+    "sidebar": {
+      "tags": []
+    },
+    "uploader": {
+      "tags": []
     }
   }
 }
