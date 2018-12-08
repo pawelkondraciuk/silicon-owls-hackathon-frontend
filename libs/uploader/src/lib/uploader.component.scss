@@ -6,7 +6,7 @@ mat-toolbar {
   justify-content: stretch;
   align-content: stretch;
   height: 100%;
-  padding: 15px 10px;
+  padding: 0;
 
   mat-icon {
     font-size: 45px;
@@ -14,12 +14,7 @@ mat-toolbar {
     margin-right: 10px;
   }
 
-  .drop-files-here {
-    border: 2px mat-color($primary) dashed;
-    border-radius: 15px;
-  }
-
-  & > * {
+  label {
     height: 100%;
     width: 100%;
     display: flex;

@@ -1,29 +1,5 @@
 <owls-navbar class="mat-elevation-z6"></owls-navbar>
 <section class="container">
-  <owls-uploader (newFile)="onNewFile($event)" [@uploaderAnimation]="files.length > 0"></owls-uploader>
-  <div class="upload-item" *ngFor="let f of files; let i = index;">
-    <div class="upload-item-content">
-      <div class="filename">
-        <i class="ionicon ion-ios-copy"></i>
-        <span>{{ f.name }}</span>
-      </div>
-      <div class="progress-content">
-        <div class="progress">
-          <span class="bar" [style.width]="f?.progress?.data?.percentage + '%'" [class.is-done]="f?.progress?.data?.percentage === 100"></span>
-        </div>
-      </div>
-      <div class="progress-text-content">
-      <span class="progress-text" [class.is-done]="f?.progress?.data?.percentage === 100">
-        <span>{{ f.progress?.data?.percentage }}% </span>
-        <span *ngIf="f.progress?.data?.percentage !== 100">Uploading...</span>
-        <span *ngIf="f.progress?.data?.percentage === 100">Done</span>
-      </span>
-        <span class="speed-and-eta-text" *ngIf="f.progress?.data?.percentage !== 0 && f.progress?.data?.percentage !== 100">
-        <span>{{ f.progress?.data?.speedHuman }} </span>
-        <span>ETA {{ f.progress?.data?.etaHuman }}</span>
-      </span>
-      </div>
-    </div>
-  </div>
-
+  <owls-uploader [@uploaderAnimation]="(ticketsFacade.totalEntities$ | async) > 0"></owls-uploader>
+  <owls-tickets></owls-tickets>
 </section>

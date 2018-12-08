@@ -237,6 +237,34 @@
           }
         }
       }
+    },
+    "tickets": {
+      "root": "libs/tickets",
+      "sourceRoot": "libs/tickets/src",
+      "projectType": "library",
+      "prefix": "owls",
+      "architect": {
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "libs/tickets/src/test.ts",
+            "tsConfig": "libs/tickets/tsconfig.spec.json",
+            "karmaConfig": "libs/tickets/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/tickets/tsconfig.lib.json",
+              "libs/tickets/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "cli": {

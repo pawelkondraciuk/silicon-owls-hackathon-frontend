@@ -1,6 +1,7 @@
 import { animate, query, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { UploadFile } from 'ngx-uploader';
+import { TicketsFacade } from '../../../../libs/tickets/src/lib/+state/tickets.facade';
 
 @Component({
   selector: 'owls-root',
@@ -23,9 +24,5 @@ import { UploadFile } from 'ngx-uploader';
   ]
 })
 export class AppComponent {
-  files: UploadFile[] = [];
-
-  onNewFile(file: UploadFile) {
-    this.files.push(file);
-  }
+  constructor(public ticketsFacade: TicketsFacade) { }
 }

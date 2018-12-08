@@ -1,0 +1,29 @@
+<mat-accordion>
+  <mat-expansion-panel
+    *ngFor="let entity of ticketsFacade.allEntities$ | async"
+    [disabled]="entity.file?.state !== 'done'"
+  >
+    <mat-expansion-panel-header *ngIf="entity.file?.state !== 'done'">
+      <mat-panel-title>
+        {{ entity.file.name }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ entity.file.state }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <mat-expansion-panel-header *ngIf="entity.ticket">
+      <mat-panel-title>
+        {{ entity.ticket.start_place }} - {{ entity.ticket.finish_place }}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{ entity.ticket.start_time | date:'d MMMM HH:mm':'UTC' }} - {{ entity.ticket.finish_time | date:'d MMMM HH:mm':'UTC' }}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <owls-ticket
+      *ngIf="entity.ticket"
+      [ticket]="entity.ticket"
+    ></owls-ticket>
+  </mat-expansion-panel>
+</mat-accordion>

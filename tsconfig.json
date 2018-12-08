@@ -27,6 +27,9 @@
       ],
       "@owls/uploader": [
         "libs/uploader/src/index.ts"
+      ],
+      "@owls/tickets": [
+        "libs/tickets/src/index.ts"
       ]
     }
   },

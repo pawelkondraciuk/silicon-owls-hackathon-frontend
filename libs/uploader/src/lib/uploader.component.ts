@@ -1,6 +1,9 @@
-import { Component, EventEmitter, HostListener, Input, Output } from '@angular/core';
-import { UploadOutput, UploadInput, UploadFile, humanizeBytes, UploaderOptions, UploadStatus } from 'ngx-uploader';
+import { Component, EventEmitter, HostListener, Output } from '@angular/core';
+import { FILE_STATE } from '@owls/tickets';
+import { humanizeBytes, UploaderOptions, UploadFile, UploadInput, UploadOutput } from 'ngx-uploader';
+import { TicketsFacade } from '../../../tickets/src/lib/+state/tickets.facade';
 
+let nextUniqueId = 0;
 
 @Component({
   selector: 'owls-uploader',
@@ -18,7 +21,7 @@ export class UploaderComponent {
   options: UploaderOptions;
   @Output() newFile = new EventEmitter<UploadFile>();
 
-  constructor() {
+  constructor(private ticketsFacade: TicketsFacade) {
     this.options = { concurrency: 1, maxUploads: 3 };
     // this.files = [];
     this.uploadInput = new EventEmitter<UploadInput>();
@@ -47,18 +50,23 @@ export class UploaderComponent {
     if (output.type === 'allAddedToQueue') {
       const event: UploadInput = {
         type: 'uploadAll',
-        url: 'https://ngx-uploader.com/upload',
+        url: 'http://mrogowski.nazwa.pl:8080/api/ticket/',
         method: 'POST',
-        data: { foo: 'bar' }
+        fieldName: 'ticket',
+        id: `${nextUniqueId--}`
       };
 
       this.uploadInput.emit(event);
     } else if (output.type === 'addedToQueue' && typeof output.file !== 'undefined') {
-      // this.files.push(output.file);
+
     } else if (output.type === 'uploading' && typeof output.file !== 'undefined') {
-      // const index = this.files.findIndex(file => typeof output.file !== 'undefined' && file.id === output.file.id);
-      // this.files[index] = output.file;
-      this.newFile.emit(output.file);
+      this.ticketsFacade.addEntity({
+        file: {
+          id: +output.file.id,
+          name: output.file.name,
+          state: FILE_STATE.INPROGRESS
+        }
+      })
     } else if (output.type === 'removed') {
       // this.files = this.files.filter((file: UploadFile) => file !== output.file);
     } else if (output.type === 'dragOver') {
@@ -68,34 +76,24 @@ export class UploaderComponent {
     } else if (output.type === 'drop') {
       this.dragOver = false;
     } else if (output.type === 'rejected' && typeof output.file !== 'undefined') {
-      console.log(output.file.name + ' rejected');
+
+    } else if (output.type === 'done' && output.file.responseStatus !== 200) {
+      this.ticketsFacade.fileUploadError({
+        file: {
+          id: +output.file.id,
+          name: output.file.name,
+          state: FILE_STATE.ERROR
+        }
+      })
+    } else if (output.type === 'done') {
+      this.ticketsFacade.fileUploadDone({
+        file: {
+          id: +output.file.id,
+          name: output.file.name,
+          state: FILE_STATE.DONE
+        },
+        ticket: output.file.response
+      })
     }
-
-    // this.files = this.files.filter(file => file.progress.status !== UploadStatus.Done);
   }
-
-  startUpload(): void {
-    const event: UploadInput = {
-      type: 'uploadAll',
-      url: 'https://ngx-uploader.com/upload',
-      method: 'POST',
-      data: { foo: 'bar' }
-    };
-
-    this.uploadInput.emit(event);
-  }
-
-  cancelUpload(id: string): void {
-    this.uploadInput.emit({ type: 'cancel', id: id });
-  }
-
-  removeFile(id: string): void {
-    this.uploadInput.emit({ type: 'remove', id: id });
-  }
-
-  removeAllFiles(): void {
-    this.uploadInput.emit({ type: 'removeAll' });
-  }
-
-
 }
