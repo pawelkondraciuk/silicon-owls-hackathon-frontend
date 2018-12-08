@@ -16,6 +16,9 @@
     ],
     "baseUrl": ".",
     "paths": {
+      "@owls/app-material": [
+        "libs/app-material/src/index.ts"
+      ]
     }
   },
   "exclude": [
