@@ -1,0 +1,37 @@
+@import '~@angular/material/theming';
+
+$primary: mat-palette($mat-amber);
+
+mat-toolbar {
+  justify-content: stretch;
+  align-content: stretch;
+  height: 100%;
+  padding: 15px 10px;
+
+  mat-icon {
+    font-size: 45px;
+    vertical-align: bottom;
+    margin-right: 10px;
+  }
+
+  .drop-files-here {
+    border: 2px mat-color($primary) dashed;
+    border-radius: 15px;
+  }
+
+  & > * {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  label {
+    cursor: pointer;
+  }
+}
+
+input#fileUpload {
+  display: none;
+}

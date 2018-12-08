@@ -1,3 +1,14 @@
 owls-navbar {
   display: block;
 }
+
+owls-uploader {
+  flex: 1 1 auto;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 920px;
+  margin: 30px auto;
+}

@@ -1,16 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { MatButtonModule, MatIconModule, MatToolbarModule } from '@angular/material';
+import { NgxUploaderModule } from 'ngx-uploader';
 import { UploaderComponent } from './uploader.component';
 
 @NgModule({
   imports: [
     CommonModule,
 
-    RouterModule.forChild([
-      {path: '', pathMatch: 'full', component: UploaderComponent},
-    ])
+    MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+
+    NgxUploaderModule,
   ],
-  declarations: [UploaderComponent]
+  declarations: [UploaderComponent],
+  exports: [UploaderComponent]
 })
 export class UploaderModule {}

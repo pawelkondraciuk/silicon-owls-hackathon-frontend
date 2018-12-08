@@ -1,3 +1,28 @@
-<p>
-  uploader works!
-</p>
+<mat-toolbar
+  class="mat-elevation-z8"
+  color="primary"
+  ngFileDrop
+  [options]="options"
+  [uploadInput]="uploadInput"
+  (uploadOutput)="onUploadOutput($event)"
+>
+  <label for="fileUpload" *ngIf="!dragOverDocument && !dragOver">
+    Drag files here or &nbsp;<strong>Browse</strong>&nbsp; to upload.
+  </label>
+  <div class="drag-files-here" *ngIf="dragOverDocument">
+    <mat-icon [inline]="true">cloud_upload</mat-icon>
+    Drag files here
+  </div>
+  <div class="drop-files-here" *ngIf="dragOver">
+    <mat-icon [inline]="true">cloud_upload</mat-icon>
+    Drop files here
+  </div>
+</mat-toolbar>
+<input
+  type="file"
+  id="fileUpload"
+  ngFileSelect
+  [options]="options"
+  (uploadOutput)="onUploadOutput($event)"
+  [uploadInput]="uploadInput"
+/>
