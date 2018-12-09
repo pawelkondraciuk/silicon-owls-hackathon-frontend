@@ -16,11 +16,26 @@
   </mat-expansion-panel>
 
   <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      {{ ticket.finish_time | date:'HH:mm' }} {{ ticket.finish_place }}
+    <mat-expansion-panel-header fxLayout="row">
+      <div>
+        {{ ticket.finish_time | date:'HH:mm' }} {{ ticket.finish_place }}
+      </div>
+      <div fxLayoutAlign="center" *ngIf="ticket.closed_station_at_arrival">
+        <mat-icon
+          color="warn"
+          matTooltip="Miejsce może być zamknięte, skontaktuj się z infolinią przewoźnika"
+          aria-label="Miejsce może być zamknięte, skontaktuj się z infolinią przewoźnika"
+        >warning</mat-icon>
+      </div>
     </mat-expansion-panel-header>
 
     <mat-list>
+      <ng-template [ngIf]="ticket.closed_station_at_arrival">
+        <mat-list-item>
+          <div class="mat-warn">Miejsce może być zamknięte, skontaktuj się z infolinią przewoźnika</div>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+      </ng-template>
       <ng-template ngFor let-accessibility let-last="last" [ngForOf]="ticket.finish_place_accessibility">
         <mat-list-item>
           {{ accessibility }}

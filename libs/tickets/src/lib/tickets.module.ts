@@ -8,7 +8,7 @@ import {
   MatDialogModule,
   MatExpansionModule,
   MatBottomSheetModule,
-  MatListModule
+  MatListModule, MatIconModule, MatTooltipModule
 } from '@angular/material';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -42,6 +42,8 @@ import { ConnectionComponent } from './components/connection/connection.componen
     MatExpansionModule,
     MatBottomSheetModule,
     MatListModule,
+    MatIconModule,
+    MatTooltipModule
   ],
   providers: [
     TicketsFacade,

@@ -18,11 +18,21 @@
         {{ entity.ticket.start_place }} - {{ entity.ticket.finish_place }}
       </mat-panel-title>
       <mat-panel-description fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
-        <div class="start-time">
-          {{ entity.ticket.start_time | date:'d MMM HH:mm':'UTC' }}
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="3px" fxLayoutGap.xs="0">
+          <div>
+            {{ entity.ticket.start_time | date:'d MMM':'UTC' }}
+          </div>
+          <div>
+            {{ entity.ticket.start_time | date:'HH:mm':'UTC' }}
+          </div>
         </div>
-        <div class="end-time">
-          {{ entity.ticket.finish_time | date:'d MMM HH:mm':'UTC' }}
+        <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="3px" fxLayoutGap.xs="0">
+          <div>
+            {{ entity.ticket.finish_time | date:'d MMM':'UTC' }}
+          </div>
+          <div>
+            {{ entity.ticket.finish_time | date:'HH:mm':'UTC' }}
+          </div>
         </div>
       </mat-panel-description>
     </mat-expansion-panel-header>

@@ -70,6 +70,7 @@ export interface Ticket {
   total_length:               number;
   qr_code:                    string;
   upload_date:                string;
+  closed_station_at_arrival: boolean;
 }
 
 export interface Entity {
