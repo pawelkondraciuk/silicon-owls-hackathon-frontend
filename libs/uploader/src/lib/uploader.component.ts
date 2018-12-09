@@ -2,6 +2,7 @@ import { Component, EventEmitter, HostListener, Output } from '@angular/core';
 import { FILE_STATE } from '@owls/tickets';
 import { humanizeBytes, UploaderOptions, UploadFile, UploadInput, UploadOutput } from 'ngx-uploader';
 import { TicketsFacade } from '../../../tickets/src/lib/+state/tickets.facade';
+import { API_BASE } from '../../../tickets/src/lib/services/tickets.service';
 
 let nextUniqueId = 0;
 
@@ -45,7 +46,7 @@ export class UploaderComponent {
     if (output.type === 'allAddedToQueue') {
       const event: UploadInput = {
         type: 'uploadAll',
-        url: 'http://mrogowski.nazwa.pl:8080/api/ticket/',
+        url: `${API_BASE}/ticket/`,
         method: 'POST',
         fieldName: 'ticket',
         id: `${nextUniqueId--}`
