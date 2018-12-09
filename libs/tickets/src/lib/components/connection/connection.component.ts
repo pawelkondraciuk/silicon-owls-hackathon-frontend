@@ -14,6 +14,9 @@ export class ConnectionComponent {
   }
 
   get carInfo() {
+    if (!this.ticket.car_info.cars) {
+      return null;
+    }
     const carNumber = this.ticket.car_number;
     const carMappingKey = this.ticket.car_info.car_mapping[carNumber];
     return this.ticket.car_info.cars[carMappingKey];

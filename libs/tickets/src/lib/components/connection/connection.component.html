@@ -20,7 +20,11 @@
       </div>
     </h3>
 
-    <img class="car-image" [src]="carInfo.vagon_img" alt="Zdjęcie wagonu" />
+    <img
+      *ngIf="carInfo"
+      class="car-image"
+      [src]="carInfo.vagon_img"
+      alt="Zdjęcie wagonu" />
 
   </mat-expansion-panel>
 </mat-accordion>
