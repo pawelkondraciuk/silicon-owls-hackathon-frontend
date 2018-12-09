@@ -1,5 +1,6 @@
 <mat-accordion>
   <mat-expansion-panel
+    role="button"
     *ngFor="let entity of ticketsFacade.allEntities$ | async"
     [disabled]="entity.file && entity.file?.state !== 'done'"
   >
@@ -16,7 +17,7 @@
       <mat-panel-title>
         {{ entity.ticket.start_place }} - {{ entity.ticket.finish_place }}
       </mat-panel-title>
-      <mat-panel-description>
+      <mat-panel-description fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="16px">
         <div class="start-time">
           {{ entity.ticket.start_time | date:'d MMM HH:mm':'UTC' }}
         </div>

@@ -1,0 +1,26 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{ ticket.train_number }}
+      </mat-panel-title>
+      <mat-panel-description fxLayout="row" fxLayout.xs="column">
+        <div>
+          {{ ticket.connection_current_info.status }}
+        </div>
+        <div *ngIf="isLate">
+          &nbsp;{{ ticket.connection_current_info.late }}
+        </div>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <h3 fxLayout="row space-between" fxLayout.xs="column" fxLayoutAlign="space-between">
+      <div>Wagon: {{ ticket.car_number }} </div>
+      <div>
+        Miejsca: {{ ticket.seats.join(', ') }}
+      </div>
+    </h3>
+
+    <img [src]="carInfo.vagon_img" />
+
+  </mat-expansion-panel>
+</mat-accordion>

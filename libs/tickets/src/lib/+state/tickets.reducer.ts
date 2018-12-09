@@ -17,26 +17,59 @@ export enum FILE_STATE {
   DONE = 'done'
 }
 
+export interface ConnectionCurrentInfo {
+  status:      string;
+  late:        string;
+  late_reason: string;
+}
+
+export interface TrainInfo {
+  number:           string;
+  vagon_img:        string;
+  titles_imgs_urls: Array<string[]>;
+}
+
+export interface CarInfo {
+  cars:        Cars;
+  train_info:  TrainInfo;
+  car_mapping: { [key: string]: string };
+}
+
+export interface Cars {
+  key_2: TrainInfo;
+  key_3: TrainInfo;
+  key_4: TrainInfo;
+  key_5: TrainInfo;
+  key_6: TrainInfo;
+  key_7: TrainInfo;
+  key_8: TrainInfo;
+  key_9: TrainInfo;
+}
 
 /* tslint:disable:no-empty-interface */
 export interface Ticket {
-  id:            number;
-  tickets:       string[];
-  purchase_date: string;
-  carrier:       string;
-  start_time:    string;
-  finish_time:   string;
-  start_place:   string;
-  finish_place:  string;
-  class:         string;
-  stops:         string[];
-  cost:          string;
-  seats:         string[];
-  train_number:  string;
-  car_number:    string;
-  total_length:  string;
-  qr_code:      string;
-  created_at:    string;
+  id:                         number;
+  carrier_contact_phone:      string;
+  start_place_accessibility:  string[];
+  finish_place_accessibility: string[];
+  connection_current_info:    ConnectionCurrentInfo;
+  car_info:                   CarInfo;
+  tickets:                    string[];
+  purchase_date:              string;
+  carrier:                    string;
+  start_time:                 string;
+  finish_time:                string;
+  start_place:                string;
+  finish_place:               string;
+  car_class:                  number;
+  stops:                      string[];
+  cost:                       string;
+  seats:                      string[];
+  train_number:               string;
+  car_number:                 number;
+  total_length:               number;
+  qr_code:                    string;
+  upload_date:                string;
 }
 
 export interface Entity {
@@ -66,10 +99,10 @@ export const adapter: EntityAdapter<Entity> = createEntityAdapter<Entity>({
     } else if (!b.ticket) {
       return 1;
     }
-    const aD = new Date(a.ticket.created_at);
-    const bD = new Date(b.ticket.created_at);
+    const aD = new Date(a.ticket.upload_date);
+    const bD = new Date(b.ticket.upload_date);
 
-    return aD.getTime() - bD.getTime();
+    return bD.getTime() - aD.getTime();
   }
 });
 

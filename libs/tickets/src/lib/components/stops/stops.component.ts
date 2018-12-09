@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Ticket } from '@owls/tickets';
 
 @Component({
   selector: 'owls-stops',
@@ -7,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class StopsComponent implements OnInit {
 
-  @Input() stops: string[];
+  @Input() ticket: Ticket;
 
   constructor() { }
 

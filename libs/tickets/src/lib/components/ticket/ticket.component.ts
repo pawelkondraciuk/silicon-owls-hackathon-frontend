@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatBottomSheet } from '@angular/material';
 import { Ticket } from '../../+state/tickets.reducer';
+import { CarrierContactComponent } from '../carrier-contact/carrier-contact.component';
 import { QrCodeComponent } from '../qr-code/qr-code.component';
 
 @Component({
@@ -11,11 +12,20 @@ import { QrCodeComponent } from '../qr-code/qr-code.component';
 export class TicketComponent {
   @Input() ticket: Ticket;
 
-  constructor(private dialog: MatDialog) { }
+  constructor(
+    private dialog: MatDialog,
+    private bottomSheet: MatBottomSheet
+  ) { }
 
   showQrCode() {
     this.dialog.open(QrCodeComponent, {
       data: { qrCode: this.ticket.qr_code }
     });
+  }
+
+  showCarrierContact() {
+    this.bottomSheet.open(CarrierContactComponent, {
+      data: this.ticket
+    })
   }
 }

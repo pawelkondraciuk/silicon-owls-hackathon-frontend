@@ -1,8 +1,44 @@
-<section>
-  <button
-    mat-raised-button
-    (click)="showQrCode()"
-  >
-    Pokaż kod QR
-  </button>
-</section>
+<div fxLayout="column" fxLayoutGap="16px">
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <h2>{{ ticket.train_number }}</h2>
+    <h3>{{ ticket.cost | currency:'PLN' }}</h3>
+  </div>
+  <div fxLayoutGap="column">
+    <h3>Informacje o przejeździe</h3>
+    <owls-connection [ticket]="ticket"></owls-connection>
+  </div>
+  <div fxLayout="column">
+    <h3>Informacje o stacjach</h3>
+    <owls-stops
+      [ticket]="ticket"
+    ></owls-stops>
+  </div>
+  <div class="buttons-container" fxLayout="row wrap" fxLayoutGap="16px" fxLayoutGap.xs="0" fxLayout.xs="column" fxLayoutAlign="space-between">
+    <button
+      mat-raised-button
+      (click)="showQrCode()"
+    >
+      Pokaż kod QR
+    </button>
+    <button
+      mat-raised-button
+      (click)="showCarrierContact()"
+    >
+      Kontakt z przewoźnikiem
+    </button>
+    <button
+      mat-raised-button
+    >
+      Dodaj do kalendarza
+    </button>
+
+    <a
+      mat-raised-button
+      color="warn"
+      href="https://bilet.intercity.pl/lista_biletow.jsp"
+      target="_blank"
+    >
+      Anuluj przejazd
+    </a>
+  </div>
+</div>

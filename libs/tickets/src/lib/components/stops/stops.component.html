@@ -1,5 +1,32 @@
-Przez:
-<span *ngFor="let stop of stops; let last = last;">
-  {{ stop }}
-  <span *ngIf="!last"> * </span>
-</span>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      {{ ticket.start_time | date:'HH:mm' }} {{ ticket.start_place }}
+    </mat-expansion-panel-header>
+
+    <mat-list>
+      <ng-template ngFor let-accessibility let-last="last" [ngForOf]="ticket.start_place_accessibility">
+        <mat-list-item>
+          {{ accessibility }}
+        </mat-list-item>
+        <mat-divider *ngIf="!last"></mat-divider>
+      </ng-template>
+    </mat-list>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      {{ ticket.finish_time | date:'HH:mm' }} {{ ticket.finish_place }}
+    </mat-expansion-panel-header>
+
+    <mat-list>
+      <ng-template ngFor let-accessibility let-last="last" [ngForOf]="ticket.finish_place_accessibility">
+        <mat-list-item>
+          {{ accessibility }}
+        </mat-list-item>
+        <mat-divider *ngIf="!last"></mat-divider>
+      </ng-template>
+    </mat-list>
+  </mat-expansion-panel>
+</mat-accordion>

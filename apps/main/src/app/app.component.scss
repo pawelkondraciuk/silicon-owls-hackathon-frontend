@@ -2,22 +2,12 @@ owls-navbar {
   display: block;
 }
 
-owls-uploader {
-  flex: 1 1 auto;
-}
-
-.tickets-container {
-  margin-top: 30px;
-}
-
 mat-spinner {
   margin: 40px auto;
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
   max-width: 920px;
-  margin: 30px auto;
-  padding: 0 30px;
+  margin: 32px auto;
+  padding: 0 32px;
 }
