@@ -35,6 +35,8 @@ export interface Ticket {
   train_number:  string;
   car_number:    string;
   total_length:  string;
+  qr_code:      string;
+  created_at:    string;
 }
 
 export interface Entity {
@@ -49,7 +51,7 @@ export interface File {
 }
 
 export interface TicketsState extends EntityState<Entity> {
-
+  loaded: boolean;
 }
 
 export interface TicketsPartialState {
@@ -57,11 +59,22 @@ export interface TicketsPartialState {
 }
 
 export const adapter: EntityAdapter<Entity> = createEntityAdapter<Entity>({
-  selectId: model => model.ticket ? model.ticket.id : model.file.id
+  selectId: model => model.ticket ? model.ticket.id : model.file.id,
+  sortComparer: (a, b) => {
+    if (!a.ticket) {
+      return -1;
+    } else if (!b.ticket) {
+      return 1;
+    }
+    const aD = new Date(a.ticket.created_at);
+    const bD = new Date(b.ticket.created_at);
+
+    return aD.getTime() - bD.getTime();
+  }
 });
 
 export const initialState: TicketsState = adapter.getInitialState({
-
+  loaded: false
 });
 
 export function ticketsReducer(
@@ -69,6 +82,18 @@ export function ticketsReducer(
   action: TicketsAction
 ): TicketsState {
   switch (action.type) {
+    case TicketsActionTypes.LoadTickets: {
+      return {
+        ...state,
+        loaded: false,
+      }
+    }
+    case TicketsActionTypes.TicketsLoaded: {
+      return adapter.addMany(action.payload, {
+        ...state,
+        loaded: true,
+      });
+    }
     case TicketsActionTypes.AddEntity: {
       return adapter.addOne(action.payload.entity, state);
     }

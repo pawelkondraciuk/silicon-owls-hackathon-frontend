@@ -1,5 +1,8 @@
 <owls-navbar class="mat-elevation-z6"></owls-navbar>
 <section class="container">
   <owls-uploader [@uploaderAnimation]="(ticketsFacade.totalEntities$ | async) > 0"></owls-uploader>
-  <owls-tickets></owls-tickets>
+  <div class="tickets-container" [ngSwitch]="ticketsFacade.loaded$ | async">
+    <owls-tickets *ngSwitchCase="true"></owls-tickets>
+    <mat-spinner *ngSwitchCase="false"></mat-spinner>
+  </div>
 </section>

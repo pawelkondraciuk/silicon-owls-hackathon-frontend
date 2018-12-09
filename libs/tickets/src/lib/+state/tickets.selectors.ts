@@ -13,7 +13,13 @@ const getTotalEntities = createSelector(
   selectTotal,
 );
 
+const getLoaded = createSelector(
+  getTicketsState,
+  (state) => state.loaded,
+)
+
 export const ticketsQuery = {
   getAllEntities,
   getTotalEntities,
+  getLoaded,
 };

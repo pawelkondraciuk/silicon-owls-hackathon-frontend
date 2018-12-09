@@ -12,18 +12,13 @@ let nextUniqueId = 0;
 })
 export class UploaderComponent {
 
-  formData: FormData;
-  // files: UploadFile[];
   uploadInput: EventEmitter<UploadInput>;
   humanizeBytes: Function;
-  dragOver: boolean;
   dragOverDocument: boolean;
   options: UploaderOptions;
-  @Output() newFile = new EventEmitter<UploadFile>();
 
   constructor(private ticketsFacade: TicketsFacade) {
-    this.options = { concurrency: 1, maxUploads: 3 };
-    // this.files = [];
+    this.options = { concurrency: 1 };
     this.uploadInput = new EventEmitter<UploadInput>();
     this.humanizeBytes = humanizeBytes;
   }
@@ -38,8 +33,8 @@ export class UploaderComponent {
   }
 
   @HostListener('document:dragleave', ['$event'])
-  public onDragLeave(e: Event) {
-    if (!e) {
+  public onDragLeave(e: MouseEvent) {
+    if (!e || e.clientX || e.clientY) {
       return;
     }
 
@@ -67,16 +62,6 @@ export class UploaderComponent {
           state: FILE_STATE.INPROGRESS
         }
       })
-    } else if (output.type === 'removed') {
-      // this.files = this.files.filter((file: UploadFile) => file !== output.file);
-    } else if (output.type === 'dragOver') {
-      this.dragOver = true;
-    } else if (output.type === 'dragOut') {
-      this.dragOver = false;
-    } else if (output.type === 'drop') {
-      this.dragOver = false;
-    } else if (output.type === 'rejected' && typeof output.file !== 'undefined') {
-
     } else if (output.type === 'done' && output.file.responseStatus !== 200) {
       this.ticketsFacade.fileUploadError({
         file: {

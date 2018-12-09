@@ -1,3 +1,4 @@
+import { MatProgressSpinnerModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,6 +23,8 @@ import { storeFreeze } from 'ngrx-store-freeze';
     BrowserModule,
     BrowserAnimationsModule,
     NxModule.forRoot(),
+
+    MatProgressSpinnerModule,
 
     NavbarModule,
     SidebarModule,

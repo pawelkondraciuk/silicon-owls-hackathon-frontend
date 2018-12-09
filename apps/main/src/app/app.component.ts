@@ -24,5 +24,9 @@ import { TicketsFacade } from '../../../../libs/tickets/src/lib/+state/tickets.f
   ]
 })
 export class AppComponent {
-  constructor(public ticketsFacade: TicketsFacade) { }
+  constructor(
+    public ticketsFacade: TicketsFacade
+  ) {
+    ticketsFacade.loadTickets();
+  }
 }

@@ -1,9 +1,9 @@
 <mat-accordion>
   <mat-expansion-panel
     *ngFor="let entity of ticketsFacade.allEntities$ | async"
-    [disabled]="entity.file?.state !== 'done'"
+    [disabled]="entity.file && entity.file?.state !== 'done'"
   >
-    <mat-expansion-panel-header *ngIf="entity.file?.state !== 'done'">
+    <mat-expansion-panel-header *ngIf="entity.file && entity.file?.state !== 'done'">
       <mat-panel-title>
         {{ entity.file.name }}
       </mat-panel-title>
@@ -17,7 +17,12 @@
         {{ entity.ticket.start_place }} - {{ entity.ticket.finish_place }}
       </mat-panel-title>
       <mat-panel-description>
-        {{ entity.ticket.start_time | date:'d MMMM HH:mm':'UTC' }} - {{ entity.ticket.finish_time | date:'d MMMM HH:mm':'UTC' }}
+        <div class="start-time">
+          {{ entity.ticket.start_time | date:'d MMM HH:mm':'UTC' }}
+        </div>
+        <div class="end-time">
+          {{ entity.ticket.finish_time | date:'d MMM HH:mm':'UTC' }}
+        </div>
       </mat-panel-description>
     </mat-expansion-panel-header>
 

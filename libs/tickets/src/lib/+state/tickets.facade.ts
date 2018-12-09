@@ -8,8 +8,13 @@ import { ticketsQuery } from './tickets.selectors';
 export class TicketsFacade {
   allEntities$ = this.store.select(ticketsQuery.getAllEntities);
   totalEntities$ = this.store.select(ticketsQuery.getTotalEntities);
+  loaded$ = this.store.select(ticketsQuery.getLoaded);
 
   constructor(private store: Store<TicketsState>) {}
+
+  loadTickets() {
+    this.store.dispatch(new fromTicketsActions.LoadTickets());
+  }
 
   addEntity(entity: Entity) {
     this.store.dispatch(new fromTicketsActions.AddEntity({entity}));
