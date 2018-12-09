@@ -3,11 +3,11 @@
     <h2>{{ ticket.train_number }}</h2>
     <h3>{{ ticket.cost | currency:'PLN' }}</h3>
   </div>
-  <div fxLayoutGap="column">
+  <div fxLayoutGap="column" aria-label="Informacje o przyjeździe">
     <h3>Informacje o przejeździe</h3>
     <owls-connection [ticket]="ticket"></owls-connection>
   </div>
-  <div fxLayout="column">
+  <div fxLayout="column" aria-label="Informacje o stacjach">
     <h3>Informacje o stacjach</h3>
     <owls-stops
       [ticket]="ticket"

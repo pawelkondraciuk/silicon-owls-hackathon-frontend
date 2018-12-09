@@ -7,7 +7,7 @@
   [uploadInput]="uploadInput"
   (uploadOutput)="onUploadOutput($event)"
 >
-  <label for="fileUpload" *ngIf="!dragOverDocument">
+  <label for="fileUpload" *ngIf="!dragOverDocument" aria-label="Nacinij aby przesłać bilet">
     Przeciągnij pliki tutaj lub kliknij aby przesłać bilet
   </label>
   <div class="drag-files-here" *ngIf="dragOverDocument">
